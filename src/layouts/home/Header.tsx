@@ -1,4 +1,4 @@
-import { searchForProducts } from "@/store/productsSlice";
+import { useAppActions } from "@/hooks/useAppActions";
 import {
   IconBell,
   IconDiscount2,
@@ -11,13 +11,15 @@ import { useDispatch } from "react-redux";
 export default function Header() {
   const insets = useSafeAreaInsets();
   const dispatch = useDispatch();
+  const { searchForProducts } = useAppActions();
+  
   return (
     <View
       style={{ paddingTop: insets.top }}
       className={`flex py-6 px-4 bg-white rounded-b-3xl flex-col gap-6`}
     >
       <View className="flex flex-row justify-between items-center">
-        <View className="flex justify-center items-center h-12 w-12 bg-primary rounded-full">
+        <View className="flex justify-center items-center h-12 w-12 bg-green rounded-full">
           <IconDiscount2 color="#000" size={24} />
         </View>
         <View className="flex flex-col items-center gap-1">
@@ -26,17 +28,17 @@ export default function Header() {
             92 High Street, London
           </Text>
         </View>
-        <View className="flex justify-center items-center h-12 w-12 bg-[#f0f0f0] rounded-full">
+        <View className="flex justify-center items-center h-12 w-12 bg-gray rounded-full">
           <IconBell color="#000" size={24} />
           <View className="flex justify-center items-center border-2 border-[#fff] absolute top-0 right-0 w-4 h-4 bg-[#97ccc3] rounded-full" />
         </View>
       </View>
 
-      <View className="flex flex-row justify-center items-center gap-2 bg-[#f0f0f0] rounded-xl h-14">
+      <View className="flex flex-row justify-center items-center gap-2 bg-gray rounded-xl h-14">
         <IconSearch size={16} color="#8a9194" />
         <TextInput
           placeholder="Search the entire shop"
-          className="text-base text-[#8a9194]"
+          className="text-base text-softGray"
           onChangeText={(text) => dispatch(searchForProducts(text))}
         />
       </View>

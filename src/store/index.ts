@@ -1,9 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { categoriesApi } from "./categoriesApi";
-import { categoryApi } from "./categoryApi";
-import { productsSlice } from "./productsSlice";
-import { cartSlice } from "./cartSlice";
-import { useSelector } from "react-redux";
+import { categoriesApi } from "./apis/categoriesApi";
+import { categoryApi } from "./apis/categoryApi";
+import { productsSlice } from "./slices/productsSlice";
+import { cartSlice } from "./slices/cartSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +19,3 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export const useAppSelector = useSelector.withTypes<RootState>();
-
-

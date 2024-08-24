@@ -3,14 +3,17 @@ import { IconCurrencyPound, IconHeart } from "@tabler/icons-react-native";
 import { router } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "@/store";
-import { selectProduct } from "@/store/productsSlice";
 import { useEffect, useState } from "react";
 import { Image } from "expo-image";
+import { useAppStore } from "@/hooks/useAppStore";
+import { useAppActions } from "@/hooks/useAppActions";
 
 export default function Items() {
   const dispatch = useDispatch();
-  const { shownProducts } = useAppSelector((state) => state.productsSlice);
+  const {
+    productsState: { shownProducts },
+  } = useAppStore();
+  const { selectProduct } = useAppActions();
   const [timeRemaining, setTimeRemaining] = useState(3 * 3600);
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,13 +30,12 @@ export default function Items() {
     2,
     "0"
   )}:${String(timeRemaining % 60).padStart(2, "0")}`;
-
   return (
     <View className="flex flex-col">
       <View className="w-full flex flex-row items-center justify-between">
         <View className="flex flex-row items-center gap-3">
           <Text className="text-2xl font-bold">Flash Sale</Text>
-          <View className="flex justify-center items-center p-1 rounded-lg bg-primary">
+          <View className="flex justify-center items-center p-1 rounded-lg bg-green">
             <Text className="text-lg font-medium">{formattedTime}</Text>
           </View>
         </View>
@@ -51,7 +53,7 @@ export default function Items() {
             }}
           >
             {category.images[0] && (
-              <View className="bg-[#f0f0f0] flex justify-center items-center py-6 rounded-2xl relative">
+              <View className="bg-gray flex justify-center items-center py-6 rounded-2xl relative">
                 <Image
                   style={{ width: 96, height: 96 }}
                   source={{ uri: category.images[0] }}

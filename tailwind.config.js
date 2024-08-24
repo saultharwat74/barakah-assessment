@@ -1,17 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+const { colors } = require("./colors");
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
-      colors: {
-        primary: {
-          DEFAULT: "#c3e600",
-        },
-        secondary: {
-          DEFAULT: "#8d9296",
-        },
-      },
+      colors,
     },
   },
   future: {

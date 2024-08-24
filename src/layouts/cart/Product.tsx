@@ -1,9 +1,5 @@
 import Checkbox from "@/components/Checkbox";
-import {
-  addToCart,
-  removeFromCart,
-  setSelectedProduct,
-} from "@/store/cartSlice";
+import { useAppActions } from "@/hooks/useAppActions";
 import { Product as TProduct } from "@/types";
 import {
   IconCurrencyPound,
@@ -19,6 +15,8 @@ type ProductProps = {
 };
 export default function Product({ product }: ProductProps) {
   const dispatch = useDispatch();
+  const { addToCart, removeFromCart, setSelectedProduct } = useAppActions();
+
   return (
     <View className="flex flex-row items-center gap-6 py-4 h-44">
       <View className="flex flex-row items-center gap-4 h-32">
@@ -29,7 +27,7 @@ export default function Product({ product }: ProductProps) {
           }] rounded-2xl`}
           checked={product.selected}
         />
-        <View className="flex items-center justify-center h-32 w-32 bg-[#f0f0f0] rounded-2xl">
+        <View className="flex items-center justify-center h-32 w-32 bg-gray rounded-2xl">
           <Image
             source={{ uri: product.images[0] }}
             style={{ width: 40, height: 40 }}
@@ -47,14 +45,14 @@ export default function Product({ product }: ProductProps) {
           <View className="flex flex-row items-center gap-3">
             <Pressable
               onPress={() => dispatch(removeFromCart(product.id))}
-              className="flex justify-center items-center h-8 w-8 bg-[#f0f0f0] rounded-full"
+              className="flex justify-center items-center h-8 w-8 bg-gray rounded-full"
             >
               <IconMinus size={16} color={"#000"} />
             </Pressable>
             <Text className="text-lg font-bold">{product.quantity}</Text>
             <Pressable
               onPress={() => dispatch(addToCart({ ...product }))}
-              className="flex justify-center items-center h-8 w-8 bg-[#f0f0f0] rounded-full"
+              className="flex justify-center items-center h-8 w-8 bg-gray rounded-full"
             >
               <IconPlus size={16} color={"#000"} />
             </Pressable>

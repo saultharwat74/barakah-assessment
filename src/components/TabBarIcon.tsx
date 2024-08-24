@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/store";
+import { useAppStore } from "@/hooks/useAppStore";
 import { RouterKey } from "@/types";
 import {
   IconHeart,
@@ -13,12 +13,14 @@ import { Text, View } from "react-native";
 type TabBarIconProps = {
   focused: boolean;
   routerKey: RouterKey;
-}
+};
 function TabBarIcon({ focused, routerKey }: TabBarIconProps) {
-  const { products } = useAppSelector((state) => state.cartSlice);
+  const {
+    cartState: { cartItems },
+  } = useAppStore();
   const quantity = useMemo(
-    () => products.reduce((acc, product) => acc + product.quantity, 0),
-    [products]
+    () => cartItems.reduce((acc, product) => acc + product.quantity, 0),
+    [cartItems]
   );
   const iconRender: JSX.Element = useMemo(() => {
     const icons: Record<string, JSX.Element> = {

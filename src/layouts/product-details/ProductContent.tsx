@@ -8,13 +8,16 @@ import {
   IconThumbUp,
 } from "@tabler/icons-react-native";
 import { useDispatch } from "react-redux";
-import { addToCart } from "@/store/cartSlice";
-import { useAppSelector } from "@/store";
 import Button from "@/components/Button";
+import { useAppStore } from "@/hooks/useAppStore";
+import { useAppActions } from "@/hooks/useAppActions";
 
 export default function ProductContent() {
   const dispatch = useDispatch();
-  const { selectedProduct } = useAppSelector((state) => state.productsSlice);
+  const {
+    productsState: { selectedProduct },
+  } = useAppStore();
+  const { addToCart } = useAppActions();
   return (
     <View className="gap-10 rounded-t-3xl flex-col justify-between bg-white px-4 py-8">
       <View className="flex flex-col gap-6">
@@ -46,7 +49,7 @@ export default function ProductContent() {
           </View>
         </View>
 
-        <View className="w-full h-14 bg-[#f0f0f0] rounded-xl flex-row items-center justify-between px-6">
+        <View className="w-full h-14 bg-gray rounded-xl flex-row items-center justify-between px-6">
           <View className="flex flex-row items-center gap-4">
             <View className="flex flex-row items-center">
               <IconCurrencyPound color={"#000"} size={28} />
@@ -73,10 +76,10 @@ export default function ProductContent() {
           onPress={() => {
             if (selectedProduct) {
               dispatch(addToCart({ ...selectedProduct, selected: true }));
-              router.push("/(tabs)");
+              router.navigate("/(tabs)");
             }
           }}
-          className="w-full flex justify-center items-center bg-primary h-14 rounded-xl"
+          className="w-full flex justify-center items-center bg-green h-14 rounded-xl"
         />
         <Text className="text-lg">Delivery on 26 October</Text>
       </View>
