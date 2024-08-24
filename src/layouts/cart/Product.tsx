@@ -1,10 +1,15 @@
+import Checkbox from "@/components/Checkbox";
 import {
   addToCart,
   removeFromCart,
   setSelectedProduct,
 } from "@/store/cartSlice";
 import { Product as TProduct } from "@/types";
-import { IconCheck, IconCurrencyPound, IconMinus, IconPlus } from "@tabler/icons-react-native";
+import {
+  IconCurrencyPound,
+  IconMinus,
+  IconPlus,
+} from "@tabler/icons-react-native";
 import { Image } from "expo-image";
 import { Pressable, Text, View } from "react-native";
 import { useDispatch } from "react-redux";
@@ -17,14 +22,13 @@ export default function Product({ product }: ProductProps) {
   return (
     <View className="flex flex-row items-center gap-6 py-4 h-44">
       <View className="flex flex-row items-center gap-4 h-32">
-        <Pressable
+        <Checkbox
           onPress={() => dispatch(setSelectedProduct(product.id))}
           className={`flex justify-center items-center h-10 w-10 bg-[${
             product.selected ? "#97ccc3" : "#f0f0f0"
           }] rounded-2xl`}
-        >
-          {product.selected ? <IconCheck size={24} color={"#fff"} /> : null}
-        </Pressable>
+          checked={product.selected}
+        />
         <View className="flex items-center justify-center h-32 w-32 bg-[#f0f0f0] rounded-2xl">
           <Image
             source={{ uri: product.images[0] }}

@@ -1,21 +1,7 @@
-import { useAppSelector } from "@/store";
-import {
-  IconHeart,
-  IconHome,
-  IconSearch,
-  IconShoppingCart,
-  IconUserCircle,
-} from "@tabler/icons-react-native";
+import TabBarIcon from "@/components/TabBarIcon";
+import TabBarLabel from "@/components/TabBarLabel";
 import { Tabs } from "expo-router";
-import { useMemo } from "react";
-import { Text, View } from "react-native";
-
 export default function TabLayout() {
-  const { products } = useAppSelector((state) => state.cartSlice);
-  const quantity = useMemo(
-    () => products.reduce((acc, product) => acc + product.quantity, 0),
-    [products]
-  );
   return (
     <Tabs
       screenOptions={{ headerShown: false, tabBarStyle: { borderTopWidth: 0 } }}
@@ -24,20 +10,10 @@ export default function TabLayout() {
         name="index"
         options={{
           tabBarLabel: ({ focused }) => (
-            <Text
-              className={`text-sm ${
-                focused ? "text-[#000]" : "text-[#8d9296]"
-              }`}
-            >
-              Home
-            </Text>
+            <TabBarLabel focused={focused} routerKey="index" />
           ),
           tabBarIcon: ({ focused }) => (
-            <IconHome
-              size={28}
-              color={focused ? "#c3e600" : "#8d9296"}
-              fill={focused ? "#c3e600" : "#8d9296"}
-            />
+            <TabBarIcon focused={focused} routerKey="index" />
           ),
         }}
       />
@@ -45,16 +21,22 @@ export default function TabLayout() {
         name="catalog"
         options={{
           tabBarLabel: ({ focused }) => (
-            <Text
-              className={`text-sm ${
-                focused ? "text-[#000]" : "text-[#8d9296]"
-              }`}
-            >
-              Catalog
-            </Text>
+            <TabBarLabel focused={focused} routerKey="catalog" />
           ),
           tabBarIcon: ({ focused }) => (
-            <IconSearch size={28} color={focused ? "#c3e600" : "#8d9296"} />
+            <TabBarIcon focused={focused} routerKey="catalog" />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="cart"
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <TabBarLabel focused={focused} routerKey="cart" />
+          ),
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} routerKey="cart" />
           ),
         }}
       />
@@ -62,46 +44,10 @@ export default function TabLayout() {
         name="favorites"
         options={{
           tabBarLabel: ({ focused }) => (
-            <Text
-              className={`text-sm ${
-                focused ? "text-[#000]" : "text-[#8d9296]"
-              }`}
-            >
-              Favorites
-            </Text>
+            <TabBarLabel focused={focused} routerKey="favorites" />
           ),
           tabBarIcon: ({ focused }) => (
-            <IconHeart size={28} color={focused ? "#c3e600" : "#8d9296"} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="cart"
-        options={{
-          tabBarLabel: ({ focused }) => (
-            <Text
-              className={`text-sm ${
-                focused ? "text-[#000]" : "text-[#8d9296]"
-              }`}
-            >
-              Cart
-            </Text>
-          ),
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <IconShoppingCart
-                size={28}
-                color={focused ? "#c3e600" : "#8d9296"}
-                fill={focused ? "#c3e600" : "#fff"}
-              />
-              <View
-                className={
-                  "flex justify-center items-center border-2 border-[#fff] absolute top-0 right-0 w-5 h-5 bg-[#000] rounded-full"
-                }
-              >
-                <Text className="text-xs text-white">{quantity}</Text>
-              </View>
-            </View>
+            <TabBarIcon focused={focused} routerKey="favorites" />
           ),
         }}
       />
@@ -109,16 +55,10 @@ export default function TabLayout() {
         name="profile"
         options={{
           tabBarLabel: ({ focused }) => (
-            <Text
-              className={`text-sm ${
-                focused ? "text-[#000]" : "text-[#8d9296]"
-              }`}
-            >
-              Profile
-            </Text>
+            <TabBarLabel focused={focused} routerKey="profile" />
           ),
           tabBarIcon: ({ focused }) => (
-            <IconUserCircle size={28} color={focused ? "#c3e600" : "#8d9296"} />
+            <TabBarIcon focused={focused} routerKey="profile" />
           ),
         }}
       />

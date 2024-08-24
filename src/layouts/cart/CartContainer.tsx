@@ -1,10 +1,11 @@
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { router } from "expo-router";
-import { IconCheck } from "@tabler/icons-react-native";
 import Product from "./Product";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/store";
 import { resetCart, toggleSelectAll } from "@/store/cartSlice";
+import Button from "@/components/Button";
+import Checkbox from "@/components/Checkbox";
 
 export default function CartContainer() {
   const { products, allSelected } = useAppSelector((state) => state.cartSlice);
@@ -16,14 +17,13 @@ export default function CartContainer() {
         <>
           <View className="flex flex-row justify-between items-center">
             <View className="flex-row items-center gap-4">
-              <Pressable
+              <Checkbox
+                checked={allSelected}
                 onPress={() => dispatch(toggleSelectAll())}
                 className={`flex justify-center items-center h-10 w-10 bg-[${
                   allSelected ? "#97ccc3" : "#f0f0f0"
                 }] rounded-2xl`}
-              >
-                {allSelected ? <IconCheck size={24} color={"#fff"} /> : null}
-              </Pressable>
+              />
               <Text className="text-xl font-bold">Select all</Text>
             </View>
           </View>
@@ -33,15 +33,15 @@ export default function CartContainer() {
                 <Product product={product} key={product.id} />
               ))}
             </ScrollView>
-            <Pressable
+
+            <Button
               onPress={() => {
                 dispatch(resetCart());
                 router.push("/(tabs)");
               }}
               className="flex justify-center items-center bg-primary h-14 rounded-xl mb-6"
-            >
-              <Text className="text-xl font-bold">Checkout</Text>
-            </Pressable>
+              labelProps={{ label: "Checkout", className: "text-xl font-bold" }}
+            />
           </View>
         </>
       )}

@@ -1,10 +1,16 @@
 import { router } from "expo-router";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { IconCurrencyPound, IconInfoCircle, IconMailQuestion, IconMessage2Question, IconMessageQuestion, IconStarFilled, IconThumbUp } from "@tabler/icons-react-native";
+import {
+  IconCurrencyPound,
+  IconInfoCircle,
+  IconStarFilled,
+  IconThumbUp,
+} from "@tabler/icons-react-native";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
 import { useAppSelector } from "@/store";
+import Button from "@/components/Button";
 
 export default function ProductContent() {
   const dispatch = useDispatch();
@@ -62,7 +68,8 @@ export default function ProductContent() {
       </View>
 
       <View className="w-full flex flex-col items-center gap-1">
-        <Pressable
+        <Button
+          labelProps={{ label: "Add to cart", className: "text-xl font-bold" }}
           onPress={() => {
             if (selectedProduct) {
               dispatch(addToCart({ ...selectedProduct, selected: true }));
@@ -70,9 +77,7 @@ export default function ProductContent() {
             }
           }}
           className="w-full flex justify-center items-center bg-primary h-14 rounded-xl"
-        >
-          <Text className="text-xl font-bold">Add to cart</Text>
-        </Pressable>
+        />
         <Text className="text-lg">Delivery on 26 October</Text>
       </View>
     </View>

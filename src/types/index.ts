@@ -56,3 +56,5 @@ export type Category =  {
   name: string;
   url: string;
 }
+
+export type RouterKey = "index" | "catalog" | "favorites" | "profile" | "cart";
