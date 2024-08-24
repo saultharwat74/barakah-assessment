@@ -1,9 +1,9 @@
-# Expo Router and Tailwind CSS
+# eCommerce App
 
-Use [Expo Router](https://docs.expo.dev/router/introduction/) with [Nativewind](https://www.nativewind.dev/v4/overview/) styling.
+Ecommerce platform built with Expo, React Native, Redux Toolkit, and Tailwind CSS.
 
-## 🚀 How to use
+## Getting Started
 
-```sh
-npx create-expo-app -e with-router-tailwind
-```
+1. Clone the Repository: `git clone https://github.com/saultharwat74/barakah-assessment.git`
+2. Install Dependencies: `npm install`
+3. Start the Development Server: `expo start`
